@@ -8,9 +8,33 @@ let boardWidth = tileSize * columns; // 32 * 16
 let boardHeight = tileSize * rows; // 32 * 16
 let context;
 
+//ship
+let shipWidth = tileSize*2;
+let shipHeight = tileSize;
+let shipX = tileSize * columns/2 - tileSize;
+let shipY = tileSize * rows - tileSize*2;
+
+let ship = {
+    x : shipX,
+    y : shipY,
+    width : shipWidth,
+    height : shipHeight
+}
+
+let shipImg ;
+
 window.onload = function() {
     board = document.getElementById('board');
     board.width = boardWidth;
     board.height = boardHeight;
-    context = board.getContext('2d'); // us
+    context = board.getContext('2d'); // use to draw on the canvas
+
+    // context.fillStyle = 'green';
+    // context.fillRect(ship.x,ship.y, shipWidth, shipHeight);
+
+    shipImg = new Image();
+    shipImg.src = './ship.png';
+    shipImg.onload = function() {
+        context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.height);
+    }
 };
