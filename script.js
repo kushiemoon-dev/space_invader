@@ -22,6 +22,7 @@ let ship = {
 }
 
 let shipImg ;
+let shipVelocityX = tileSize;
 
 window.onload = function() {
     board = document.getElementById('board');
@@ -37,4 +38,22 @@ window.onload = function() {
     shipImg.onload = function() {
         context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.height);
     }
+    requestAnimationFrame(update);
+    document.addEventListener('keydown', moveShip);
 };
+
+function update() {
+    requestAnimationFrame(update);
+    context.clearRect(0,0,boardWidth, boardHeight);
+    context.drawImage(shipImg, ship.x, ship.y, ship.width, ship.height);
+}
+
+function moveShip(e) {
+    if (e.code == 'ArrowLeft' && ship.x - shipVelocityX >= 0) {
+        ship.x -= shipVelocityX;
+    }
+    else if (e.code == 'ArrowRight' && ship.x + shipVelocityX + ship.width <= board.width) {
+        ship.x += shipVelocityX;
+    }
+
+}
